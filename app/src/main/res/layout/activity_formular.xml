@@ -19,7 +19,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Förnamn:"
+        android:text="Forname:"
         android:textColor="#949ECF"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,9 +28,9 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="125dp"
-        android:layout_height="18dp"
-        android:text="click to edit"
+        android:layout_width="147dp"
+        android:layout_height="19dp"
+        android:text="doubleclick to edit"
         android:textColor="#949ECF"
         tools:layout_editor_absoluteX="131dp"
         tools:layout_editor_absoluteY="77dp" />
@@ -40,16 +40,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Efternamn:"
+        android:text="Surname:"
         android:textColor="#949ECF"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         tools:layout_editor_absoluteX="62dp" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="126dp"
-        android:layout_height="21dp"
-        android:text="click to edit"
+        android:layout_width="149dp"
+        android:layout_height="23dp"
+        android:text="doubleclick to edit"
         android:textColor="#949ECF"
         tools:layout_editor_absoluteX="142dp"
         tools:layout_editor_absoluteY="109dp" />
@@ -59,16 +59,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Ålder:"
+        android:text="Age:"
         android:textColor="#949ECF"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         tools:layout_editor_absoluteX="62dp" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="126dp"
-        android:layout_height="20dp"
-        android:text="click to edit"
+        android:layout_width="166dp"
+        android:layout_height="21dp"
+        android:text="doubleclick to edit"
         android:textColor="#949ECF"
         tools:layout_editor_absoluteX="108dp"
         tools:layout_editor_absoluteY="145dp" />
@@ -78,18 +78,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:text="Yrke:"
+        android:text="Occupation:"
         android:textColor="#949ECF"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
         tools:layout_editor_absoluteX="62dp" />
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="129dp"
+        android:layout_width="159dp"
         android:layout_height="20dp"
-        android:text="click to edit"
+        android:text="doubleclick to edit"
         android:textColor="#949ECF"
-        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteX="141dp"
         tools:layout_editor_absoluteY="180dp" />
 
     <TextView
@@ -97,16 +97,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="500dp"
-        android:text="Intressen:"
+        android:text="Hobbies:"
         android:textColor="#949ECF"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="62dp" />
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="133dp"
+        android:layout_width="174dp"
         android:layout_height="20dp"
-        android:text="click to edit"
+        android:text="doubleclick to edit"
         android:textColor="#949ECF"
         tools:layout_editor_absoluteX="135dp"
         tools:layout_editor_absoluteY="212dp" />

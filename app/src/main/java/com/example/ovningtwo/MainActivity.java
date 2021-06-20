@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Login",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menuFormular:
-                Log.d("formular", "menu formulär selected");
-                Toast.makeText(this, "Formulär",Toast.LENGTH_LONG).show();
+                Log.d("formular", "menu form selected");
+                Toast.makeText(this, "Form",Toast.LENGTH_LONG).show();
                 return true;
             case R.id.menuShowInfo:
                 Log.d("showInfo","show menu selected");
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyUp(int keyCode, KeyEvent event){
 
         String fromUsername = textviewUsername.getText().toString();
-        
-      if(fromUsername.equals("click to edit")) {
+
+      if(fromUsername.equals("doubleclick to edit")) {
           textviewUsername.setText("");
           fromUsername = "";
           Log.d("KOLLA", fromUsername);
