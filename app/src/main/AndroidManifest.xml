@@ -12,6 +12,7 @@
         <activity android:name=".Saved"></activity>
         <activity android:name=".Formular" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

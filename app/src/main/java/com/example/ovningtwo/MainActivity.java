@@ -1,6 +1,7 @@
 package com.example.ovningtwo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.KeyEventDispatcher;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -27,22 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textviewUsername = findViewById(R.id.textView14);
-
-     /*   TextView textviewUsername = (TextView) findViewById(R.id.textView14);
-
-
-        textviewUsername.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                    Log.d("CPÅKE", "OLLAHA");
-
-
-
-
-
-            }
-        });*/
-
+        im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
     }
@@ -84,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("CPÅKE", "test test");
 
 
-        im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         im.showSoftInput(view, InputMethodManager.SHOW_FORCED);
 
 
@@ -92,13 +78,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event){
-        switch (keyCode){
-            case KeyEvent.KEYCODE_D:
-                textviewUsername.setText("D");
-                return true;
-            default:
-                return super.onKeyUp(keyCode, event);
-        }
+
+        String fromUsername = textviewUsername.getText().toString();
+        
+      if(fromUsername.equals("click to edit")) {
+          textviewUsername.setText("");
+          fromUsername = "";
+          Log.d("KOLLA", fromUsername);
+      }
+
+        char x = (char) event.getUnicodeChar();
+        textviewUsername.setText(fromUsername + String.valueOf(x));
+
+
+        return super.onKeyUp(keyCode, event);
     }
 
 
