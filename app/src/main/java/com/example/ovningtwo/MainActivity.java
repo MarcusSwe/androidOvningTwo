@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private InputMethodManager im;
     private TextView textviewUsername;
+    private View omega;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickUsername(View view) {
 
+        omega = view;
 
 
-
-        im.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        im.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
 
 
     }
@@ -84,8 +85,11 @@ public class MainActivity extends AppCompatActivity {
       if(fromUsername.equals("doubleclick to edit")) {
           textviewUsername.setText("");
           fromUsername = "";
-          Log.d("KOLLA", fromUsername);
       }
+
+
+          Log.d("CPÅKE", String.valueOf(keyCode));
+
 
       switch (keyCode) {
           case 67:
@@ -94,8 +98,9 @@ public class MainActivity extends AppCompatActivity {
                   textviewUsername.setText(fromUsername);
               }
               return true;
-          case 66:
-              Log.d("tedfst", "tesdfst");
+          case 45:
+              Log.d("CPÅKE", "test test");
+             ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
               return true;
           default:
               char x = (char) event.getUnicodeChar();
