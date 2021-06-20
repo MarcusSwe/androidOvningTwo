@@ -22,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
     private InputMethodManager im;
     private TextView textviewUsername;
+    private TextView textviewPassword;
     private View omega;
     private Button dummy;
+    private int whatEver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         dummy = findViewById(R.id.dummyMain);
 
         textviewUsername = findViewById(R.id.textView14);
+        textviewPassword = findViewById(R.id.textView16);
+
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
     }
@@ -71,7 +75,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickUsername(View view) {
+        whatEver = 1;
+        omega = view;
 
+        im.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
+        dummy.requestFocus();
+
+    }
+
+    public void onClickPassword(View view) {
+        whatEver = 2;
         omega = view;
 
         im.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
@@ -83,37 +96,66 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyUp(int keyCode, KeyEvent event){
 
 
+        if(whatEver ==1){
+            String fromUsername = textviewUsername.getText().toString();
 
-        String fromUsername = textviewUsername.getText().toString();
+            if(fromUsername.equals("doubleclick to edit")) {
+                textviewUsername.setText("");
+                fromUsername = "";
+            }
 
-        if(fromUsername.equals("doubleclick to edit")) {
-            textviewUsername.setText("");
-            fromUsername = "";
+            switch (keyCode) {
+                case 67:
+                    if(fromUsername.length() >0){
+                        fromUsername = fromUsername.substring(0, fromUsername.length() - 1);
+                        textviewUsername.setText(fromUsername);
+                    }
+                    dummy.requestFocus();
+                    return true;
+                case 66:
+                    Log.d("CPÅKE", "test test");
+                    ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                    dummy.requestFocus();
+                    return true;
+                default:
+                    char x = (char) event.getUnicodeChar();
+                    textviewUsername.setText(fromUsername + String.valueOf(x));
+                    dummy.requestFocus();
+                    return super.onKeyUp(keyCode, event);
+            }
+
+        } else {
+            String fromPassword = textviewPassword.getText().toString();
+
+            if(fromPassword.equals("doubleclick to edit")) {
+                textviewPassword.setText("");
+                fromPassword = "";
+            }
+
+            switch (keyCode) {
+                case 67:
+                    if(fromPassword.length() >0){
+                        fromPassword = fromPassword.substring(0, fromPassword.length() - 1);
+                        textviewPassword.setText(fromPassword);
+                    }
+                    dummy.requestFocus();
+                    return true;
+                case 66:
+                    Log.d("CPÅKE", "test test");
+                    ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                    dummy.requestFocus();
+                    return true;
+                default:
+                    char x = (char) event.getUnicodeChar();
+                    textviewPassword.setText(fromPassword + String.valueOf(x));
+                    dummy.requestFocus();
+                    return super.onKeyUp(keyCode, event);
+            }
         }
 
 
-        Log.d("CPÅKE", String.valueOf(keyCode));
 
 
-        switch (keyCode) {
-            case 67:
-                if(fromUsername.length() >0){
-                    fromUsername = fromUsername.substring(0, fromUsername.length() - 1);
-                    textviewUsername.setText(fromUsername);
-                }
-                dummy.requestFocus();
-                return true;
-            case 66:
-                Log.d("CPÅKE", "test test");
-                ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
-                dummy.requestFocus();
-                return true;
-            default:
-                char x = (char) event.getUnicodeChar();
-                textviewUsername.setText(fromUsername + String.valueOf(x));
-                dummy.requestFocus();
-                return super.onKeyUp(keyCode, event);
-        }
 
     }
 

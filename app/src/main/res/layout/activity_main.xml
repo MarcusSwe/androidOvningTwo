@@ -88,7 +88,12 @@
         android:layout_height="30dp"
         android:text="doubleclick to edit"
         android:textColor="#949ECF"
-
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:onClick="onClickPassword"
+        android:singleLine="true"
+        android:freezesText="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.64"
