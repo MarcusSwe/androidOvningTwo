@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickUsername(View view) {
-        Log.d("CPÅKE", "test test");
+
 
 
 
@@ -87,12 +87,22 @@ public class MainActivity extends AppCompatActivity {
           Log.d("KOLLA", fromUsername);
       }
 
-        char x = (char) event.getUnicodeChar();
-        textviewUsername.setText(fromUsername + String.valueOf(x));
+      switch (keyCode) {
+          case 67:
+              if(fromUsername.length() >0){
+                  fromUsername = fromUsername.substring(0, fromUsername.length() - 1);
+                  textviewUsername.setText(fromUsername);
+              }
+              return true;
+          case 66:
+              Log.d("tedfst", "tesdfst");
+              return true;
+          default:
+              char x = (char) event.getUnicodeChar();
+              textviewUsername.setText(fromUsername + String.valueOf(x));
+              return super.onKeyUp(keyCode, event);
+      }
 
-
-        return super.onKeyUp(keyCode, event);
     }
-
 
 }
