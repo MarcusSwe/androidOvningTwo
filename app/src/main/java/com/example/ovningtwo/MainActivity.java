@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,14 +23,18 @@ public class MainActivity extends AppCompatActivity {
     private InputMethodManager im;
     private TextView textviewUsername;
     private View omega;
+    private Button dummy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dummy = findViewById(R.id.dummyMain);
+
         textviewUsername = findViewById(R.id.textView14);
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
 
 
     }
@@ -73,41 +78,45 @@ public class MainActivity extends AppCompatActivity {
 
 
         im.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
-
+        dummy.requestFocus();
 
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event){
 
+
+
         String fromUsername = textviewUsername.getText().toString();
 
-      if(fromUsername.equals("doubleclick to edit")) {
-          textviewUsername.setText("");
-          fromUsername = "";
-      }
+        if(fromUsername.equals("doubleclick to edit")) {
+            textviewUsername.setText("");
+            fromUsername = "";
+        }
 
 
-          Log.d("CPÅKE", String.valueOf(keyCode));
+        Log.d("CPÅKE", String.valueOf(keyCode));
 
 
-      switch (keyCode) {
-          case 67:
-              if(fromUsername.length() >0){
-                  fromUsername = fromUsername.substring(0, fromUsername.length() - 1);
-                  textviewUsername.setText(fromUsername);
-              }
-              return true;
-          case 45:
-              Log.d("CPÅKE", "test test");
-             ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
-              return true;
-          default:
-              char x = (char) event.getUnicodeChar();
-              textviewUsername.setText(fromUsername + String.valueOf(x));
-              return super.onKeyUp(keyCode, event);
-      }
+        switch (keyCode) {
+            case 67:
+                if(fromUsername.length() >0){
+                    fromUsername = fromUsername.substring(0, fromUsername.length() - 1);
+                    textviewUsername.setText(fromUsername);
+                }
+                return true;
+            case 45:
+                Log.d("CPÅKE", "test test");
+                ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                return true;
+            default:
+                char x = (char) event.getUnicodeChar();
+                textviewUsername.setText(fromUsername + String.valueOf(x));
+                return super.onKeyUp(keyCode, event);
+        }
 
     }
+
+
 
 }
