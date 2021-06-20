@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         textviewUsername = findViewById(R.id.textView14);
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-
-
     }
 
 
@@ -76,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         omega = view;
 
-
         im.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
         dummy.requestFocus();
 
@@ -104,14 +101,17 @@ public class MainActivity extends AppCompatActivity {
                     fromUsername = fromUsername.substring(0, fromUsername.length() - 1);
                     textviewUsername.setText(fromUsername);
                 }
+                dummy.requestFocus();
                 return true;
-            case 45:
+            case 66:
                 Log.d("CPÅKE", "test test");
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                dummy.requestFocus();
                 return true;
             default:
                 char x = (char) event.getUnicodeChar();
                 textviewUsername.setText(fromUsername + String.valueOf(x));
+                dummy.requestFocus();
                 return super.onKeyUp(keyCode, event);
         }
 
