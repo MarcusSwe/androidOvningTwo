@@ -11,10 +11,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.security.AccessControlContext;
 
 import static java.security.AccessController.getContext;
 
@@ -24,15 +30,17 @@ public class MainActivity extends AppCompatActivity {
     private TextView textviewUsername;
     private TextView textviewPassword;
     private View omega;
-    private Button dummy;
+
     private int whatEver;
+    private ImageView dummy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dummy = findViewById(R.id.dummyMain);
+
+        dummy = findViewById(R.id.imageView);
 
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
@@ -75,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickUsername(View view) {
+        String fromUsername = textviewUsername.getText().toString();
+
+        if(fromUsername.equals("doubleclick to edit")) {
+            textviewUsername.setText("");
+            fromUsername = "";
+        }
+
         whatEver = 1;
         omega = view;
 
@@ -84,6 +99,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickPassword(View view) {
+        String fromPassword = textviewPassword.getText().toString();
+
+        if(fromPassword.equals("doubleclick to edit")) {
+            textviewPassword.setText("");
+            fromPassword = "";
+        }
+
+
         whatEver = 2;
         omega = view;
 
