@@ -92,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onClickImageView(View view) {
+
+        ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+
+    }
+
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event){
 

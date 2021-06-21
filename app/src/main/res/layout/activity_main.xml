@@ -13,6 +13,10 @@
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:src="@drawable/background"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:onClick="onClickImageView"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="0dp" />
 
