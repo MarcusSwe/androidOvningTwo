@@ -85,16 +85,25 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuMain:
                 Log.d("menuMain", "menu main selected");
                 Toast.makeText(this, "Login",Toast.LENGTH_LONG).show();
+                anim.cancel();
+                anim2.cancel();
+                ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                 return true;
             case R.id.menuFormular:
                 Log.d("formular", "menu form selected");
                 Toast.makeText(this, "Form",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(MainActivity.this, Formular.class));
+                anim.cancel();
+                anim2.cancel();
+                ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                 return true;
             case R.id.menuShowInfo:
                 Log.d("showInfo","show menu selected");
                 Toast.makeText(this, "Info",Toast.LENGTH_LONG).show();
                 startActivity(new Intent (MainActivity.this, Saved.class));
+                anim.cancel();
+                anim2.cancel();
+                ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
