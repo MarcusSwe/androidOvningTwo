@@ -8,3 +8,4 @@
 - Dodged: EditText
 - Melted: EditText
 - NoMeta: EditText
+- LostInJungle: EditText
