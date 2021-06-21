@@ -98,6 +98,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onClickLogin(View view) {
+
+        ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+
+    }
+
+    public void onClickCreate(View view) {
+
+        ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+
+    }
+
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event){
 
