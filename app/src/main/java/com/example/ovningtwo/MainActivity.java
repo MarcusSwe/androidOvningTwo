@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private View omega;
 
     private int whatEver;
-    private ImageView imageView;
     private Button dummy;
 
     @Override
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         dummy = findViewById(R.id.dummyMain);
+        omega = findViewById(R.id.dummyMain);
 
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickImageView(View view) {
 
-        ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+       ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
 
     }
 
