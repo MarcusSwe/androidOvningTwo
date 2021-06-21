@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private View omega;
 
     private int whatEver;
-    private ImageView dummy;
+    private ImageView imageView;
+    private Button dummy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        dummy = findViewById(R.id.imageView);
+        dummy = findViewById(R.id.dummyMain);
 
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
@@ -95,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
         im.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
         dummy.requestFocus();
+
+
 
     }
 
