@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private Button dummy;
     private Animation anim;
     private Animation anim2;
+    private ArrayList<ArrayList<String>> userS;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         dummy = findViewById(R.id.dummyMain);
         omega = findViewById(R.id.dummyMain); // fixar crash när man trycker utanför i starten pga variabel är tom vid start
 
+        userS = new ArrayList<>();
 
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
@@ -168,9 +172,23 @@ public class MainActivity extends AppCompatActivity {
         anim2.cancel();
         ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
 
+        for(int i = 0; i < userS.size(); i++) {
+            Log.d("OSTEN", userS.get(i).get(0));
+            Log.d("OSTEN", userS.get(i).get(1));
+        }
+
     }
 
     public void onClickCreate(View view) {
+
+        ArrayList<String> user = new ArrayList<>();
+
+        user.add((String) textviewUsername.getText());
+
+        user.add((String) textviewPassword.getText());
+
+        userS.add(user);
+
         anim.cancel();
         anim2.cancel();
         ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
