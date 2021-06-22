@@ -181,13 +181,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickCreate(View view) {
 
+        boolean userExist=false;
+
+        for(int i = 0; i < userS.size(); i++) {
+
+         if(userS.get(i).get(0).equals(textviewUsername.getText()))
+         {userExist=true;}
+        }
+
+        if(!userExist){
         ArrayList<String> user = new ArrayList<>();
-
         user.add((String) textviewUsername.getText());
-
         user.add((String) textviewPassword.getText());
-
-        userS.add(user);
+        userS.add(user);} else textviewUsername.setText("User Exist!");
 
         anim.cancel();
         anim2.cancel();
