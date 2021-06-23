@@ -18,6 +18,8 @@ public class Formular extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formular);
+
+
     }
 
     @Override
@@ -57,6 +59,8 @@ public class Formular extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
 
 }

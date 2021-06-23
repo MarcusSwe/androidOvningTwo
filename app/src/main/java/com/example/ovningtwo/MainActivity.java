@@ -1,8 +1,16 @@
 package com.example.ovningtwo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private InputMethodManager im;
     private TextView textviewUsername;
     private TextView textviewPassword;
+
     private View omega;
+
+    private ItemViewModelString omegaString;
 
     private int whatEver;
     private Button dummy;
@@ -44,13 +56,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         dummy = findViewById(R.id.dummyMain);
-        omega = findViewById(R.id.dummyMain); // fixar crash när man trycker utanför i starten pga variabel är tom vid start
+        omega = findViewById(R.id.imageView); // fixar crash när man trycker utanför i starten pga variabel är tom vid start
 
         userS = new ArrayList<>();
 
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
+
+        omegaString = new ViewModelProvider(this).get(ItemViewModelString.class);
 
         anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(750);
@@ -172,6 +187,11 @@ public class MainActivity extends AppCompatActivity {
         anim2.cancel();
         ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
 
+       // loggedIn setUserLoggedIn = (loggedIn) getSupportFragmentManager().getFragments().get(0);
+        //setUserLoggedIn.setTextFragment("Logged in as: " + textviewUsername.getText());
+
+        omegaString.selectItem((String) textviewUsername.getText());
+
         for(int i = 0; i < userS.size(); i++) {
             Log.d("OSTEN", userS.get(i).get(0));
             Log.d("OSTEN", userS.get(i).get(1));
@@ -193,7 +213,12 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> user = new ArrayList<>();
         user.add((String) textviewUsername.getText());
         user.add((String) textviewPassword.getText());
-        userS.add(user);} else textviewUsername.setText("User Exist!");
+        userS.add(user);
+        Toast.makeText(this, "USER CREATED",Toast.LENGTH_LONG).show();
+        }
+        else {textviewUsername.setText("doubleclick to edit");
+            Toast.makeText(this, "USER EXIST!",Toast.LENGTH_LONG).show();
+        }
 
         anim.cancel();
         anim2.cancel();
