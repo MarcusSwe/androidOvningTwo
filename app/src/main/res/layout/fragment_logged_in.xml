@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#006200EE"
+    android:background="#000000"
     tools:context=".loggedIn">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Username: Not Logged in!"
-        android:textColor="#673AB7"
+        android:textColor="#5E10EA"
         android:textSize="16sp" />
 
 </FrameLayout>

@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private Button dummy;
     private Animation anim;
     private Animation anim2;
-    private ArrayList<ArrayList<String>> userS;
-
+    private ArrayList<UserInfo> userS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,22 @@ public class MainActivity extends AppCompatActivity {
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
 
+
         omegaString = new ViewModelProvider(this).get(ItemViewModelString.class);
+
+        /*
+        final loggedIn fragment = new loggedIn();
+        getFragmentManager().beginTransaction().add(R.id.fragmentContainerView, fragment).commit();*/
+
+        /*
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragmentContainerView, fragment)
+                .commit();*/
+
+
+
+
 
         anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(750);
@@ -187,14 +201,19 @@ public class MainActivity extends AppCompatActivity {
         anim2.cancel();
         ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
 
+        //NEDAN FUNGERAR
        // loggedIn setUserLoggedIn = (loggedIn) getSupportFragmentManager().getFragments().get(0);
         //setUserLoggedIn.setTextFragment("Logged in as: " + textviewUsername.getText());
 
-        omegaString.selectItem((String) textviewUsername.getText());
+        //DETTA FUNGERAR MED
+         omegaString.selectItem((String) textviewUsername.getText());
+
+        //
+        //fragment.setTextFragment("Logged in as: " +textviewUsername.getText());
+
 
         for(int i = 0; i < userS.size(); i++) {
-            Log.d("OSTEN", userS.get(i).get(0));
-            Log.d("OSTEN", userS.get(i).get(1));
+
         }
 
     }
@@ -202,17 +221,18 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCreate(View view) {
 
         boolean userExist=false;
+        int arrayPlace = 0;
 
         for(int i = 0; i < userS.size(); i++) {
 
-         if(userS.get(i).get(0).equals(textviewUsername.getText()))
-         {userExist=true;}
+         if(userS.get(i).getUserName().equals(textviewUsername.getText()))
+         {userExist=true;
+         }
+         arrayPlace = i;
         }
 
         if(!userExist){
-        ArrayList<String> user = new ArrayList<>();
-        user.add((String) textviewUsername.getText());
-        user.add((String) textviewPassword.getText());
+        UserInfo user = new UserInfo(((String) textviewUsername.getText()), ((String) textviewPassword.getText()), arrayPlace);
         userS.add(user);
         Toast.makeText(this, "USER CREATED",Toast.LENGTH_LONG).show();
         }

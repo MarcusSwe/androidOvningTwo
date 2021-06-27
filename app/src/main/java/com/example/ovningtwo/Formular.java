@@ -1,6 +1,7 @@
 package com.example.ovningtwo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +15,18 @@ import android.widget.Toast;
 
 public class Formular extends AppCompatActivity {
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formular);
+
+
+
+
 
 
     }

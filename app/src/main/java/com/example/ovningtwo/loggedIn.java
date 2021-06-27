@@ -73,9 +73,12 @@ public class loggedIn extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View fragmentview = inflater.inflate(R.layout.fragment_logged_in, container, false);
         userLoggedIn = fragmentview.findViewById(R.id.fragmentUsername);
 
+
+        //  -- Detta fungerar, låt stå..
         omegaString = new ViewModelProvider(requireActivity()).get(ItemViewModelString.class);
         omegaString.getSelectedItem().observe(getViewLifecycleOwner(), text -> {
             userLoggedIn.setText(text);
