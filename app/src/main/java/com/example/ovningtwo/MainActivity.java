@@ -221,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < userS.size(); i++) {
             if(userS.get(i).getUserName().equals(textviewUsername.getText()) && userS.get(i).getPassword().equals(textviewPassword.getText()))
             {
+                arrayPlace = i;
                 omegaString.selectItem((String) textviewUsername.getText());
                 Log.d("GREKOLLE",userS.get(i).getUserName() + " " + userS.get(i).getPassword());
             } else {
