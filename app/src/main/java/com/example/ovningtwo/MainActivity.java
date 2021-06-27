@@ -206,14 +206,19 @@ public class MainActivity extends AppCompatActivity {
         //setUserLoggedIn.setTextFragment("Logged in as: " + textviewUsername.getText());
 
         //DETTA FUNGERAR MED
-         omegaString.selectItem((String) textviewUsername.getText());
+
 
         //
         //fragment.setTextFragment("Logged in as: " +textviewUsername.getText());
 
 
         for(int i = 0; i < userS.size(); i++) {
-
+            if(userS.get(i).getUserName().equals(textviewUsername.getText()) && userS.get(i).getPassword().equals(textviewPassword.getText()))
+            {
+                omegaString.selectItem((String) textviewUsername.getText());
+            } else {textviewPassword.setText("doubleclick to edit");
+                Toast.makeText(this, "WRONG PASSWORD!",Toast.LENGTH_LONG).show();
+            }
         }
 
     }
