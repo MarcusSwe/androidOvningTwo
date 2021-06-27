@@ -16,7 +16,8 @@ import android.widget.Toast;
 public class Formular extends AppCompatActivity {
 
 
-
+   private UserInfo recieveUser;
+    private ItemViewModelString omegaString;
 
 
     @Override
@@ -25,8 +26,11 @@ public class Formular extends AppCompatActivity {
         setContentView(R.layout.activity_formular);
 
 
+     recieveUser = getIntent().getParcelableExtra("inlog");
 
+     omegaString = new ViewModelProvider(this).get(ItemViewModelString.class);
 
+        omegaString.selectItem(recieveUser.getUserName());
 
 
     }

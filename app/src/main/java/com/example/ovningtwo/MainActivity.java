@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private Animation anim;
     private Animation anim2;
     private ArrayList<UserInfo> userS;
+    private int arrayPlace = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         dummy = findViewById(R.id.dummyMain);
-        omega = findViewById(R.id.imageView); // fixar crash när man trycker utanför i starten pga variabel är tom vid start
+        omega = findViewById(R.id.imageView); // fixar crash när man trycker utanför i starten pga variabel är tom vid start'
+
 
         userS = new ArrayList<>();
+        UserInfo dummyX = new UserInfo("dummy","dummy",0);
+        userS.add(dummyX);
 
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
@@ -125,7 +129,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuFormular:
                 Log.d("formular", "menu form selected");
                 Toast.makeText(this, "Form",Toast.LENGTH_LONG).show();
-                startActivity(new Intent(MainActivity.this, Formular.class));
+
+                startActivity(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
+
                 anim.cancel();
                 anim2.cancel();
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
@@ -226,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCreate(View view) {
 
         boolean userExist=false;
-        int arrayPlace = 0;
+
 
         for(int i = 0; i < userS.size(); i++) {
 
@@ -237,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(!userExist){
-        UserInfo user = new UserInfo(((String) textviewUsername.getText()), ((String) textviewPassword.getText()), arrayPlace);
+        UserInfo user = new UserInfo(((String) textviewUsername.getText()), ((String) textviewPassword.getText()), arrayPlace+1);
         userS.add(user);
         Toast.makeText(this, "USER CREATED",Toast.LENGTH_LONG).show();
         }
