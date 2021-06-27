@@ -222,7 +222,9 @@ public class MainActivity extends AppCompatActivity {
             if(userS.get(i).getUserName().equals(textviewUsername.getText()) && userS.get(i).getPassword().equals(textviewPassword.getText()))
             {
                 omegaString.selectItem((String) textviewUsername.getText());
-            } else {textviewPassword.setText("doubleclick to edit");
+                Log.d("GREKOLLE",userS.get(i).getUserName() + " " + userS.get(i).getPassword());
+            } else {
+                Log.d("GREKOLLE",userS.get(i).getUserName() + " " + userS.get(i).getPassword());
                 Toast.makeText(this, "WRONG PASSWORD!",Toast.LENGTH_LONG).show();
             }
         }
@@ -243,7 +245,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(!userExist){
-        UserInfo user = new UserInfo(((String) textviewUsername.getText()), ((String) textviewPassword.getText()), arrayPlace+1);
+            arrayPlace++;
+        UserInfo user = new UserInfo(((String) textviewUsername.getText()), ((String) textviewPassword.getText()), arrayPlace);
         userS.add(user);
         Toast.makeText(this, "USER CREATED",Toast.LENGTH_LONG).show();
         }
