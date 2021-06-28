@@ -18,6 +18,12 @@ public class UserInfo implements Parcelable {
         this.userName = username;
         this.password = passWord;
         this.arrayNumber = array;
+
+        this.forName = "doubleclick to edit";
+        this.surName = "doubleclick to edit";
+        this.age = 12;
+        this.occupation = "doubleclick to edit";
+        this.hobbies = "doubleclick to edit";
     }
 
     protected UserInfo(Parcel in) {

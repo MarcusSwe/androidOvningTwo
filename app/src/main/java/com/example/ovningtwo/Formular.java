@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 public class Formular extends AppCompatActivity {
 
 
@@ -41,6 +43,8 @@ public class Formular extends AppCompatActivity {
     private TextView age;
     private TextView occupation;
     private TextView hobbies;
+
+    private Pattern checkAge = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,15 +128,25 @@ public class Formular extends AppCompatActivity {
         omegaString.selectItem(recieveUser.getUserName());
     }
 
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        return checkAge.matcher(strNum).matches();
+    }
+
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        /*Intent backbutton = new Intent();
-        backbutton.putExtra("back", recieveUser);
-        setResult(Activity.RESULT_OK, backbutton);
-        finish();*/
-        //Toast.makeText(this, "WRONG PASSWORD!",Toast.LENGTH_LONG).show();
+
         recieveUser.setForName((String) forName.getText());
+        recieveUser.setSurName((String) surName.getText());
+
+        if(isNumeric((String) age.getText())){
+            recieveUser.setAge(Integer.parseInt((String) age.getText()));
+        }
+
+        recieveUser.setOccupation((String) occupation.getText());
+        recieveUser.setHobbies((String) hobbies.getText());
         startActivity(new Intent(this, MainActivity.class).putExtra("CP",recieveUser));
 
     }
@@ -145,6 +159,12 @@ public class Formular extends AppCompatActivity {
             case R.id.menuMain:
                 Log.d("menuMain", "menu main selected");
                 recieveUser.setForName((String) forName.getText());
+                recieveUser.setSurName((String) surName.getText());
+                if(isNumeric((String) age.getText())){
+                    recieveUser.setAge(Integer.parseInt((String) age.getText()));
+                }
+                recieveUser.setOccupation((String) occupation.getText());
+                recieveUser.setHobbies((String) hobbies.getText());
                 Log.d("CPCP200", String.valueOf(recieveUser.getArrayNumber()));
                 startActivity(new Intent(Formular.this, MainActivity.class).putExtra("CP",recieveUser));
 

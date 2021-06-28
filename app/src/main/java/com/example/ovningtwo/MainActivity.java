@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         recieveUser = getIntent().getParcelableExtra("CP");
         Log.d("CPCP", dummyX.getUserName());
-        //Log.d("CPCP", recieveUser.getUserName());
+
 
         try {
             arrayPlace = recieveUser.getArrayNumber();
@@ -128,13 +128,6 @@ public class MainActivity extends AppCompatActivity {
         }
         catch(Exception e) {}
 
-        /*try {
-            textviewUsername.setText(recieveUser.getUserName());
-            dummyX.setForName(recieveUser.getForName());
-            Log.d("CPCP", dummyX.getForName());
-        }
-        catch(Exception e) {}*/
-
     }
 
 
@@ -145,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         arrayPlace = recieveUser.getArrayNumber();
         Log.d("CPCP80000", String.valueOf(recieveUser.getArrayNumber()));
         Log.d("CPCP80000", "asdgsdfgsdfg");
+        Log.d("CPCP80000", String.valueOf(recieveUser.getAge()));
         userS.get(arrayPlace).setForName(recieveUser.getForName());
         userS.get(arrayPlace).setUserName(recieveUser.getUserName());
         userS.get(arrayPlace).setPassword(recieveUser.getPassword());
