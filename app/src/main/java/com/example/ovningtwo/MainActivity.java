@@ -35,41 +35,41 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private InputMethodManager im;
+    private UserInfo recieveUser;
+
     private TextView textviewUsername;
     private TextView textviewPassword;
 
-    private View omega;
-
     private ItemViewModelString omegaString;
 
+    private InputMethodManager im;
+    private View omega;
     private int whatEver;
     private Button dummy;
     private Animation anim;
     private Animation anim2;
+
     private ArrayList<UserInfo> userS;
     private int arrayPlace = 0;
+    private UserInfo dummyX = new UserInfo("dummy","dummy",0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         dummy = findViewById(R.id.dummyMain);
         omega = findViewById(R.id.imageView); // fixar crash när man trycker utanför i starten pga variabel är tom vid start'
 
-
         userS = new ArrayList<>();
-        UserInfo dummyX = new UserInfo("dummy","dummy",0);
+
         userS.add(dummyX);
 
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
 
-
         omegaString = new ViewModelProvider(this).get(ItemViewModelString.class);
+        //recieveUser = dummyX;
 
         /*
         final loggedIn fragment = new loggedIn();
@@ -80,10 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .add(R.id.fragmentContainerView, fragment)
                 .commit();*/
-
-
-
-
 
         anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(750);
@@ -99,8 +95,52 @@ public class MainActivity extends AppCompatActivity {
 
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
+
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        recieveUser = getIntent().getParcelableExtra("CP");
+        Log.d("CPCP", dummyX.getUserName());
+        //Log.d("CPCP", recieveUser.getUserName());
+
+        try {
+            arrayPlace = recieveUser.getArrayNumber();
+            Log.d("CPCP", String.valueOf(arrayPlace));
+            Log.d("CPCP", "asdgsdfgsdfg");
+            userS.get(arrayPlace).setForName(recieveUser.getForName());
+            userS.get(arrayPlace).setUserName(recieveUser.getUserName());
+            userS.get(arrayPlace).setPassword(recieveUser.getPassword());
+            omegaString.selectItem(recieveUser.getUserName());
+            Log.d("CPCP",userS.get(arrayPlace).getForName());
+            Log.d("CPCP", recieveUser.getForName());
+        }
+        catch(Exception e) {}
+
+        /*try {
+            textviewUsername.setText(recieveUser.getUserName());
+            dummyX.setForName(recieveUser.getForName());
+            Log.d("CPCP", dummyX.getForName());
+        }
+        catch(Exception e) {}*/
+
+    }
+
+    @Override
+    public void onNewIntent(Intent i) {
+        super.onNewIntent(i);
+        recieveUser = i.getParcelableExtra("CP");
+        arrayPlace = recieveUser.getArrayNumber();
+        Log.d("CPCP2", String.valueOf(recieveUser.getArrayNumber()));
+        Log.d("CPCP2", "asdgsdfgsdfg");
+        userS.get(arrayPlace).setForName(recieveUser.getForName());
+        userS.get(arrayPlace).setUserName(recieveUser.getUserName());
+        userS.get(arrayPlace).setPassword(recieveUser.getPassword());
+        omegaString.selectItem(recieveUser.getUserName());
+        Log.d("CPCP2",userS.get(arrayPlace).getForName());
+        Log.d("CPCP2", recieveUser.getForName());
+    }
 
 
     @Override
@@ -121,24 +161,20 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menuMain:
                 Log.d("menuMain", "menu main selected");
-                Toast.makeText(this, "Login",Toast.LENGTH_LONG).show();
                 anim.cancel();
                 anim2.cancel();
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                 return true;
             case R.id.menuFormular:
-                Log.d("formular", "menu form selected");
-                Toast.makeText(this, "Form",Toast.LENGTH_LONG).show();
-
+                Log.d("CPCP", String.valueOf(userS.get(arrayPlace).getArrayNumber()));
                 startActivity(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
-
+                //startActivity(new Intent(MainActivity.this, Formular.class));
                 anim.cancel();
                 anim2.cancel();
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                 return true;
             case R.id.menuShowInfo:
                 Log.d("showInfo","show menu selected");
-                Toast.makeText(this, "Info",Toast.LENGTH_LONG).show();
                 startActivity(new Intent (MainActivity.this, Saved.class));
                 anim.cancel();
                 anim2.cancel();
@@ -221,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < userS.size(); i++) {
             if(userS.get(i).getUserName().equals(textviewUsername.getText()) && userS.get(i).getPassword().equals(textviewPassword.getText()))
             {
+                arrayPlace = 0;
                 arrayPlace = i;
                 omegaString.selectItem((String) textviewUsername.getText());
                 Log.d("GREKOLLE",userS.get(i).getUserName() + " " + userS.get(i).getPassword());
@@ -236,17 +273,18 @@ public class MainActivity extends AppCompatActivity {
 
         boolean userExist=false;
 
+         arrayPlace = 0;
 
         for(int i = 0; i < userS.size(); i++) {
 
          if(userS.get(i).getUserName().equals(textviewUsername.getText()))
          {userExist=true;
          }
-         arrayPlace = i;
         }
 
+        arrayPlace = userS.size();
+
         if(!userExist){
-            arrayPlace++;
         UserInfo user = new UserInfo(((String) textviewUsername.getText()), ((String) textviewPassword.getText()), arrayPlace);
         userS.add(user);
         Toast.makeText(this, "USER CREATED",Toast.LENGTH_LONG).show();
