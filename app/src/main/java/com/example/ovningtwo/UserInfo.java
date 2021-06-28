@@ -21,7 +21,7 @@ public class UserInfo implements Parcelable {
 
         this.forName = "doubleclick to edit";
         this.surName = "doubleclick to edit";
-        this.age = 12;
+        this.age = 20;
         this.occupation = "doubleclick to edit";
         this.hobbies = "doubleclick to edit";
     }
