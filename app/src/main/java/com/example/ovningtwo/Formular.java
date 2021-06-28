@@ -132,6 +132,7 @@ public class Formular extends AppCompatActivity {
         super.onNewIntent(i);
         recieveUser = i.getParcelableExtra("inlog");
         omegaString.selectItem(recieveUser.getUserName());
+
     }
 
     public boolean kollaNummber(String text) {
@@ -153,7 +154,7 @@ public class Formular extends AppCompatActivity {
 
         recieveUser.setOccupation((String) occupation.getText());
         recieveUser.setHobbies((String) hobbies.getText());
-        startActivity(new Intent(this, MainActivity.class).putExtra("CP",recieveUser));
+        startActivity(new Intent(this, MainActivity.class).putExtra("inlog",recieveUser));
 
     }
 
@@ -172,7 +173,7 @@ public class Formular extends AppCompatActivity {
                 recieveUser.setOccupation((String) occupation.getText());
                 recieveUser.setHobbies((String) hobbies.getText());
                 Log.d("CPCP200", String.valueOf(recieveUser.getArrayNumber()));
-                startActivity(new Intent(Formular.this, MainActivity.class).putExtra("CP",recieveUser));
+                startActivity(new Intent(Formular.this, MainActivity.class).putExtra("inlog",recieveUser));
 
                 return true;
             case R.id.menuFormular:
@@ -182,8 +183,14 @@ public class Formular extends AppCompatActivity {
                 return true;
             case R.id.menuShowInfo:
                 Log.d("showInfo","show menu selected");
-
-                startActivity(new Intent (Formular.this, Saved.class));
+                recieveUser.setForName((String) forName.getText());
+                recieveUser.setSurName((String) surName.getText());
+                if(kollaNummber((String) age.getText())){
+                    recieveUser.setAge(Integer.parseInt((String) age.getText()));
+                }
+                recieveUser.setOccupation((String) occupation.getText());
+                recieveUser.setHobbies((String) hobbies.getText());
+                startActivity(new Intent (Formular.this, Saved.class).putExtra("inlog",recieveUser));
 
 
                 return true;
@@ -469,4 +476,14 @@ public class Formular extends AppCompatActivity {
     }
 
 
+    public void formButton(View view) {
+        recieveUser.setForName((String) forName.getText());
+        recieveUser.setSurName((String) surName.getText());
+        if(kollaNummber((String) age.getText())){
+            recieveUser.setAge(Integer.parseInt((String) age.getText()));
+        }
+        recieveUser.setOccupation((String) occupation.getText());
+        recieveUser.setHobbies((String) hobbies.getText());
+        startActivity(new Intent (Formular.this, Saved.class).putExtra("inlog",recieveUser));
+    }
 }

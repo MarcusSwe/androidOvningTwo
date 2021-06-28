@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        recieveUser = getIntent().getParcelableExtra("CP");
+        recieveUser = getIntent().getParcelableExtra("inlog");
         Log.d("CPCP", dummyX.getUserName());
 
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onNewIntent(Intent i) {
         super.onNewIntent(i);
-      recieveUser = i.getParcelableExtra("CP");
+      recieveUser = i.getParcelableExtra("inlog");
         arrayPlace = recieveUser.getArrayNumber();
         Log.d("CPCP80000", String.valueOf(recieveUser.getArrayNumber()));
         Log.d("CPCP80000", "asdgsdfgsdfg");
@@ -176,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                 return true;
             case R.id.menuFormular:
-                Log.d("CPCP", String.valueOf(userS.get(arrayPlace).getArrayNumber()));
+             //   Log.d("CPCP", String.valueOf(userS.get(arrayPlace).getArrayNumber()));
 
-                //amazing.launch(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
+
                 startActivity(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
 
                 anim.cancel();
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menuShowInfo:
                 Log.d("showInfo","show menu selected");
-                startActivity(new Intent (MainActivity.this, Saved.class));
+                startActivity(new Intent (this, Saved.class).putExtra("inlog",userS.get(arrayPlace)));
                 anim.cancel();
                 anim2.cancel();
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);

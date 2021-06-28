@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OvningTwo">
-        <activity android:name=".Saved" android:launchMode="singleTask"></activity>
-        <activity android:name=".Formular" android:launchMode="singleTask"></activity>
+        <activity android:name=".Saved" android:launchMode="singleTask" android:configChanges="orientation|screenSize">
+
+        </activity>
+        <activity android:name=".Formular" android:launchMode="singleTask" android:configChanges="orientation|screenSize">
+
+        </activity>
         <activity android:name=".MainActivity" android:launchMode="singleTask">
 
             <intent-filter>
