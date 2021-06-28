@@ -3,6 +3,7 @@ package com.example.ovningtwo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -123,6 +124,20 @@ public class Formular extends AppCompatActivity {
         omegaString.selectItem(recieveUser.getUserName());
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        /*Intent backbutton = new Intent();
+        backbutton.putExtra("back", recieveUser);
+        setResult(Activity.RESULT_OK, backbutton);
+        finish();*/
+        //Toast.makeText(this, "WRONG PASSWORD!",Toast.LENGTH_LONG).show();
+        recieveUser.setForName((String) forName.getText());
+        startActivity(new Intent(this, MainActivity.class).putExtra("CP",recieveUser));
+
+    }
+
+
     public boolean onOptionsItemSelected (MenuItem item){
 
 
@@ -154,6 +169,7 @@ public class Formular extends AppCompatActivity {
 
     public void onClickForname(View view) {
         omega = view;
+
         anim2.cancel();
         anim3.cancel();
         anim4.cancel();
@@ -179,7 +195,7 @@ public class Formular extends AppCompatActivity {
         anim4.cancel();
         anim5.cancel();
 
-        omega.startAnimation(anim);
+        omega.startAnimation(anim2);
 
         String fromUsername = surName.getText().toString();
 

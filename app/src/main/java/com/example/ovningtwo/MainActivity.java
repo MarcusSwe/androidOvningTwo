@@ -1,5 +1,10 @@
 package com.example.ovningtwo;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -7,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -96,7 +102,11 @@ public class MainActivity extends AppCompatActivity {
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
+
+
+
     }
+
 
     @Override
     public void onResume() {
@@ -127,19 +137,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onNewIntent(Intent i) {
         super.onNewIntent(i);
-        recieveUser = i.getParcelableExtra("CP");
+      recieveUser = i.getParcelableExtra("CP");
         arrayPlace = recieveUser.getArrayNumber();
-        Log.d("CPCP2", String.valueOf(recieveUser.getArrayNumber()));
-        Log.d("CPCP2", "asdgsdfgsdfg");
+        Log.d("CPCP80000", String.valueOf(recieveUser.getArrayNumber()));
+        Log.d("CPCP80000", "asdgsdfgsdfg");
         userS.get(arrayPlace).setForName(recieveUser.getForName());
         userS.get(arrayPlace).setUserName(recieveUser.getUserName());
         userS.get(arrayPlace).setPassword(recieveUser.getPassword());
         omegaString.selectItem(recieveUser.getUserName());
-        Log.d("CPCP2",userS.get(arrayPlace).getForName());
-        Log.d("CPCP2", recieveUser.getForName());
+        //Log.d("CPCP2",userS.get(arrayPlace).getForName());
+       // Log.d("CPCP2", recieveUser.getForName());
     }
 
 
@@ -151,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
         anim2.cancel();
         return true; // om nenyn finns returer true
     }
-
 
 
     public boolean onOptionsItemSelected (MenuItem item){
@@ -167,8 +177,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menuFormular:
                 Log.d("CPCP", String.valueOf(userS.get(arrayPlace).getArrayNumber()));
+
+                //amazing.launch(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
                 startActivity(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
-                //startActivity(new Intent(MainActivity.this, Formular.class));
+
                 anim.cancel();
                 anim2.cancel();
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
@@ -241,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickLogin(View view) {
         anim.cancel();
         anim2.cancel();
+        boolean finns = false;
         ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
 
         //NEDAN FUNGERAR
@@ -261,10 +274,14 @@ public class MainActivity extends AppCompatActivity {
                 arrayPlace = i;
                 omegaString.selectItem((String) textviewUsername.getText());
                 Log.d("GREKOLLE",userS.get(i).getUserName() + " " + userS.get(i).getPassword());
+                finns = true;
             } else {
                 Log.d("GREKOLLE",userS.get(i).getUserName() + " " + userS.get(i).getPassword());
-                Toast.makeText(this, "WRONG PASSWORD!",Toast.LENGTH_LONG).show();
             }
+        }
+
+        if(!finns){
+            Toast.makeText(this, "WRONG PASSWORD!",Toast.LENGTH_LONG).show();
         }
 
     }
