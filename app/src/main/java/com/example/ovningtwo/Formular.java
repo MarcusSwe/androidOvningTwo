@@ -113,10 +113,16 @@ public class Formular extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         recieveUser = getIntent().getParcelableExtra("inlog");
+        Log.d("CPCP444444444444", recieveUser.getSurName());
         omegaString.selectItem(recieveUser.getUserName());
-        Log.d("CPCP200", String.valueOf(recieveUser.getArrayNumber()));
-        Log.d("CPCP200", String.valueOf(recieveUser.getUserName()));
+        Log.d("CPCP11111111111", String.valueOf(recieveUser.getArrayNumber()));
+        Log.d("CPCP11111111111", String.valueOf(recieveUser.getAge()));
         forName.setText(recieveUser.getForName());
+        surName.setText(recieveUser.getSurName());
+        age.setText(String.valueOf(recieveUser.getAge()));
+        occupation.setText(recieveUser.getOccupation());
+        hobbies.setText(recieveUser.getHobbies());
+        //age.setText(recieveUser.getAge());
         //recieveUser = getIntent().getParcelableExtra("inlog");
         //forName.setText(recieveUser.getForName());
     }
@@ -128,11 +134,11 @@ public class Formular extends AppCompatActivity {
         omegaString.selectItem(recieveUser.getUserName());
     }
 
-    public boolean isNumeric(String strNum) {
-        if (strNum == null) {
+    public boolean kollaNummber(String text) {
+        if (text == null) {
             return false;
         }
-        return checkAge.matcher(strNum).matches();
+        return checkAge.matcher(text).matches();
     }
 
     @Override
@@ -141,7 +147,7 @@ public class Formular extends AppCompatActivity {
         recieveUser.setForName((String) forName.getText());
         recieveUser.setSurName((String) surName.getText());
 
-        if(isNumeric((String) age.getText())){
+        if(kollaNummber((String) age.getText())){
             recieveUser.setAge(Integer.parseInt((String) age.getText()));
         }
 
@@ -160,7 +166,7 @@ public class Formular extends AppCompatActivity {
                 Log.d("menuMain", "menu main selected");
                 recieveUser.setForName((String) forName.getText());
                 recieveUser.setSurName((String) surName.getText());
-                if(isNumeric((String) age.getText())){
+                if(kollaNummber((String) age.getText())){
                     recieveUser.setAge(Integer.parseInt((String) age.getText()));
                 }
                 recieveUser.setOccupation((String) occupation.getText());
@@ -229,88 +235,227 @@ public class Formular extends AppCompatActivity {
     }
 
     public void onClickAge(View view) {
+        omega = view;
+        anim.cancel();
+        anim2.cancel();
+        anim4.cancel();
+        anim5.cancel();
 
+        omega.startAnimation(anim3);
+
+        String fromUsername = age.getText().toString();
+
+        if(fromUsername.equals("doubleclick to edit")) {
+            age.setText("");
+        }
+        whatEver = 3;
+
+        im2.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
+        dummy.requestFocus();
     }
 
     public void onClickOccupation(View view) {
+        omega = view;
+        anim.cancel();
+        anim2.cancel();
+        anim3.cancel();
+        anim5.cancel();
 
+        omega.startAnimation(anim4);
+
+        String fromUsername = occupation.getText().toString();
+
+        if(fromUsername.equals("doubleclick to edit")) {
+            occupation.setText("");
+        }
+        whatEver = 4;
+
+        im2.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
+        dummy.requestFocus();
     }
 
     public void onClickHobbies(View view) {
+        omega = view;
+        anim.cancel();
+        anim2.cancel();
+        anim4.cancel();
+        anim3.cancel();
 
+        omega.startAnimation(anim5);
+
+        String fromUsername = hobbies.getText().toString();
+
+        if(fromUsername.equals("doubleclick to edit")) {
+            hobbies.setText("");
+        }
+        whatEver = 5;
+
+        im2.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
+        dummy.requestFocus();
     }
 
     @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event){
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
 
 
-        if(whatEver ==1){
-            String fromUsername = forName.getText().toString();
-
-            if(fromUsername.equals("doubleclick to edit")) {
-                forName.setText("");
-                fromUsername = "";
-            }
-
-            switch (keyCode) {
-                case 67:
-                    if(fromUsername.length() >0){
-                        fromUsername = fromUsername.substring(0, fromUsername.length() - 1);
-                        forName.setText(fromUsername);
-                    }
-                    forName.clearFocus();
-                    dummy.requestFocus();
-                    return true;
-                case 66:
-                    Log.d("CPÅKE", "test test");
-                    ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
-                    anim.cancel();
-                    anim2.cancel();
-                    dummy.requestFocus();
-                    return true;
-                default:
-                    char x = (char) event.getUnicodeChar();
-                    forName.setText(fromUsername + String.valueOf(x));
-                    dummy.requestFocus();
-                    return super.onKeyUp(keyCode, event);
-            }
-
-        } else {
-            String fromPassword = surName.getText().toString();
-
-            if(fromPassword.equals("doubleclick to edit")) {
-                surName.setText("");
-                fromPassword = "";
-            }
-
-            switch (keyCode) {
-                case 67:
-                    if(fromPassword.length() >0){
-                        fromPassword = fromPassword.substring(0, fromPassword.length() - 1);
-                        surName.setText(fromPassword);
-                    }
-                    surName.clearFocus();
-                    dummy.requestFocus();
-                    return true;
-                case 66:
-                    Log.d("CPÅKE", "test test");
-                    ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
-                    anim.cancel();
-                    anim2.cancel();
-                    dummy.requestFocus();
-                    return true;
-                default:
-                    char x = (char) event.getUnicodeChar();
-                    surName.setText(fromPassword + String.valueOf(x));
-                    dummy.requestFocus();
-                    return super.onKeyUp(keyCode, event);
-            }
+        switch (whatEver) {
+            case 1:
+                String fromUsername = forName.getText().toString();
+                if (fromUsername.equals("doubleclick to edit")) {
+                    forName.setText("");
+                    fromUsername = "";
+                }
+                switch (keyCode) {
+                    case 67:
+                        if (fromUsername.length() > 0) {
+                            fromUsername = fromUsername.substring(0, fromUsername.length() - 1);
+                            forName.setText(fromUsername);
+                        }
+                        forName.clearFocus();
+                        dummy.requestFocus();
+                        return true;
+                    case 66:
+                        Log.d("CPÅKE", "test test");
+                        ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                        anim.cancel();
+                        anim2.cancel();
+                        anim3.cancel();
+                        anim4.cancel();
+                        anim5.cancel();
+                        dummy.requestFocus();
+                        return true;
+                    default:
+                        char x = (char) event.getUnicodeChar();
+                        forName.setText(fromUsername + String.valueOf(x));
+                        dummy.requestFocus();
+                        return super.onKeyUp(keyCode, event);
+                }
+            case 2:
+                String fromPassword = surName.getText().toString();
+                if (fromPassword.equals("doubleclick to edit")) {
+                    surName.setText("");
+                    fromPassword = "";
+                }
+                switch (keyCode) {
+                    case 67:
+                        if (fromPassword.length() > 0) {
+                            fromPassword = fromPassword.substring(0, fromPassword.length() - 1);
+                            surName.setText(fromPassword);
+                        }
+                        surName.clearFocus();
+                        dummy.requestFocus();
+                        return true;
+                    case 66:
+                        Log.d("CPÅKE", "test test");
+                        ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                        anim.cancel();
+                        anim2.cancel();
+                        anim3.cancel();
+                        anim4.cancel();
+                        anim5.cancel();
+                        dummy.requestFocus();
+                        return true;
+                    default:
+                        char x = (char) event.getUnicodeChar();
+                        surName.setText(fromPassword + String.valueOf(x));
+                        dummy.requestFocus();
+                        return super.onKeyUp(keyCode, event);
+                }
+            case 3:
+                String fromAge = age.getText().toString();
+                if (fromAge.equals("doubleclick to edit")) {
+                    age.setText("");
+                    fromAge = "";
+                }
+                switch (keyCode) {
+                    case 67:
+                        if (fromAge.length() > 0) {
+                            fromAge = fromAge.substring(0, fromAge.length() - 1);
+                                age.setText(fromAge);
+                        }
+                        age.clearFocus();
+                        dummy.requestFocus();
+                        return true;
+                    case 66:
+                        Log.d("CPÅKE", "test test");
+                        ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                        anim.cancel();
+                        anim2.cancel();
+                        anim3.cancel();
+                        anim4.cancel();
+                        anim5.cancel();
+                        dummy.requestFocus();
+                        return true;
+                    default:
+                        char x = (char) event.getUnicodeChar();
+                        age.setText(fromAge + String.valueOf(x));
+                        dummy.requestFocus();
+                        return super.onKeyUp(keyCode, event);
+                }
+            case 4:
+                String fromOccupation = occupation.getText().toString();
+                if (fromOccupation.equals("doubleclick to edit")) {
+                    occupation.setText("");
+                    fromOccupation = "";
+                }
+                switch (keyCode) {
+                    case 67:
+                        if (fromOccupation.length() > 0) {
+                            fromOccupation = fromOccupation.substring(0, fromOccupation.length() - 1);
+                            occupation.setText(fromOccupation);
+                        }
+                        occupation.clearFocus();
+                        dummy.requestFocus();
+                        return true;
+                    case 66:
+                        Log.d("CPÅKE", "test test");
+                        ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                        anim.cancel();
+                        anim2.cancel();
+                        anim3.cancel();
+                        anim4.cancel();
+                        anim5.cancel();
+                        dummy.requestFocus();
+                        return true;
+                    default:
+                        char x = (char) event.getUnicodeChar();
+                        occupation.setText(fromOccupation + String.valueOf(x));
+                        dummy.requestFocus();
+                        return super.onKeyUp(keyCode, event);
+                }
+            case 5:
+                String fromHobbies = hobbies.getText().toString();
+                if (fromHobbies.equals("doubleclick to edit")) {
+                    hobbies.setText("");
+                    fromHobbies = "";
+                }
+                switch (keyCode) {
+                    case 67:
+                        if (fromHobbies.length() > 0) {
+                            fromHobbies = fromHobbies.substring(0, fromHobbies.length() - 1);
+                            hobbies.setText(fromHobbies);
+                        }
+                        hobbies.clearFocus();
+                        dummy.requestFocus();
+                        return true;
+                    case 66:
+                        Log.d("CPÅKE", "test test");
+                        ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
+                        anim.cancel();
+                        anim2.cancel();
+                        anim3.cancel();
+                        anim4.cancel();
+                        anim5.cancel();
+                        dummy.requestFocus();
+                        return true;
+                    default:
+                        char x = (char) event.getUnicodeChar();
+                        hobbies.setText(fromHobbies + String.valueOf(x));
+                        dummy.requestFocus();
+                        return super.onKeyUp(keyCode, event);
+                }
         }
-
-
-
-
-
+        return super.onKeyUp(keyCode, event);
     }
 
 

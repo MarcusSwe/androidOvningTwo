@@ -138,10 +138,16 @@ public class MainActivity extends AppCompatActivity {
         arrayPlace = recieveUser.getArrayNumber();
         Log.d("CPCP80000", String.valueOf(recieveUser.getArrayNumber()));
         Log.d("CPCP80000", "asdgsdfgsdfg");
+        Log.d("CPCP80000", recieveUser.getSurName());
         Log.d("CPCP80000", String.valueOf(recieveUser.getAge()));
         userS.get(arrayPlace).setForName(recieveUser.getForName());
+        userS.get(arrayPlace).setSurName(recieveUser.getSurName());
+        userS.get(arrayPlace).setOccupation(recieveUser.getOccupation());
+        userS.get(arrayPlace).setHobbies(recieveUser.getHobbies());
         userS.get(arrayPlace).setUserName(recieveUser.getUserName());
         userS.get(arrayPlace).setPassword(recieveUser.getPassword());
+        userS.get(arrayPlace).setAge(recieveUser.getAge());
+        Log.d("CPCP8888888", String.valueOf(userS.get(arrayPlace).getAge()));
         omegaString.selectItem(recieveUser.getUserName());
         //Log.d("CPCP2",userS.get(arrayPlace).getForName());
        // Log.d("CPCP2", recieveUser.getForName());
