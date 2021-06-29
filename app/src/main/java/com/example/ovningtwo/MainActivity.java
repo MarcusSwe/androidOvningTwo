@@ -390,6 +390,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void toForm(View view) {
+        startActivity(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
+    }
 
+    public void logout(View view) {
+        arrayPlace = 0;
+        omegaString.selectItem((userS.get(arrayPlace).getUserName()));
 
+    }
 }
