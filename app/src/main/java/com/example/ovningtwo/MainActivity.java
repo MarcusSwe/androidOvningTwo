@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private Animation anim2;
 
     private ArrayList<UserInfo> userS;
+//    private final ArrayList<UserInfo>
     private int arrayPlace = 0;
     private UserInfo dummyX = new UserInfo("dummy","dummy",0);
 
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         recieveUser = getIntent().getParcelableExtra("inlog");
         Log.d("CPCP", dummyX.getUserName());
-
+        omegaString.selectItem(userS.get(arrayPlace).getUserName());
 
         try {
             arrayPlace = recieveUser.getArrayNumber();
@@ -397,6 +399,22 @@ public class MainActivity extends AppCompatActivity {
     public void logout(View view) {
         arrayPlace = 0;
         omegaString.selectItem((userS.get(arrayPlace).getUserName()));
+        textviewUsername.setText("doubleclick to edit");
 
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("userS", userS);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        userS = savedInstanceState.getParcelableArrayList("userS");
+    }
+
+
 }

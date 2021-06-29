@@ -1,5 +1,6 @@
 package com.example.ovningtwo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -486,4 +487,17 @@ public class Formular extends AppCompatActivity {
         recieveUser.setHobbies((String) hobbies.getText());
         startActivity(new Intent (Formular.this, Saved.class).putExtra("inlog",recieveUser));
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("recieveUser", recieveUser);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        recieveUser = savedInstanceState.getParcelable("recieveUser");
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.ovningtwo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -116,10 +117,6 @@ public class Saved extends AppCompatActivity {
         }
     }
 
-    public void onClickSave(View view) {
-
-    }
-
     @Override
     public void onBackPressed() {
 
@@ -135,5 +132,27 @@ public class Saved extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class).putExtra("inlog",recieveUser));
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("recieveUser", recieveUser);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        recieveUser = savedInstanceState.getParcelable("recieveUser");
+    }
+
+
+    public void onClickSave(View view) {
+
+
+
+
+    }
+
+
 
 }
