@@ -20,6 +20,7 @@ import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -36,6 +37,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -61,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
     private int arrayPlace = 0;
     private UserInfo dummyX = new UserInfo("dummy","dummy",0);
 
+
+    private String retrieveSaveString;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         userS = new ArrayList<>();
 
-        userS.add(dummyX);
+
 
         textviewUsername = findViewById(R.id.textView14);
         textviewPassword = findViewById(R.id.textView16);
@@ -103,6 +114,15 @@ public class MainActivity extends AppCompatActivity {
 
         im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
+        SharedPreferences saVe = this.getPreferences(Context.MODE_PRIVATE);
+        retrieveSaveString = saVe.getString("userS",null);
+        if(!(retrieveSaveString == null)){
+        Type type = new TypeToken<ArrayList<UserInfo>>(){}.getType();
+        userS = new Gson().fromJson(retrieveSaveString, type);
+        } else  userS.add(dummyX);
+
+
+
 
 
 
@@ -113,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        recieveUser = getIntent().getParcelableExtra("inlog");
+        recieveUser = getIntent().getParcelableExtra("inlog"); // kommer denna krasha efter crash????
         Log.d("CPCP", dummyX.getUserName());
         omegaString.selectItem(userS.get(arrayPlace).getUserName());
 
@@ -397,9 +417,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout(View view) {
-        arrayPlace = 0;
+        /*arrayPlace = 0;
         omegaString.selectItem((userS.get(arrayPlace).getUserName()));
-        textviewUsername.setText("doubleclick to edit");
+        textviewUsername.setText("doubleclick to edit");*/
+
+        SharedPreferences saVe = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = saVe.edit();
+
+        Gson gsonSave = new Gson();
+        String recieveUserGson = gsonSave.toJson(userS);
+
+        editor.putString("userS", recieveUserGson);
+        editor.apply();
 
     }
 
