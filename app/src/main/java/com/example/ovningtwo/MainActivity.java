@@ -119,13 +119,7 @@ public class MainActivity extends AppCompatActivity {
         if(!(retrieveSaveString == null)){
         Type type = new TypeToken<ArrayList<UserInfo>>(){}.getType();
         userS = new Gson().fromJson(retrieveSaveString, type);
-        } else  userS.add(dummyX);
-
-
-
-
-
-
+        } else userS.add(dummyX);
 
     }
 
@@ -156,23 +150,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onNewIntent(Intent i) {
         super.onNewIntent(i);
-      recieveUser = i.getParcelableExtra("inlog");
-        arrayPlace = recieveUser.getArrayNumber();
-        Log.d("CPCP80000", String.valueOf(recieveUser.getArrayNumber()));
+
+       Bundle extras = i.getExtras();
+
+
+
+      /*  Log.d("CPCP80000", String.valueOf(recieveUser.getArrayNumber()));
         Log.d("CPCP80000", "asdgsdfgsdfg");
         Log.d("CPCP80000", recieveUser.getSurName());
-        Log.d("CPCP80000", String.valueOf(recieveUser.getAge()));
-        userS.get(arrayPlace).setForName(recieveUser.getForName());
-        userS.get(arrayPlace).setSurName(recieveUser.getSurName());
-        userS.get(arrayPlace).setOccupation(recieveUser.getOccupation());
-        userS.get(arrayPlace).setHobbies(recieveUser.getHobbies());
-        userS.get(arrayPlace).setUserName(recieveUser.getUserName());
-        userS.get(arrayPlace).setPassword(recieveUser.getPassword());
-        userS.get(arrayPlace).setAge(recieveUser.getAge());
-        Log.d("CPCP8888888", String.valueOf(userS.get(arrayPlace).getAge()));
-        omegaString.selectItem(recieveUser.getUserName());
+        Log.d("CPCP80000", String.valueOf(recieveUser.getAge()));*/
+
         //Log.d("CPCP2",userS.get(arrayPlace).getForName());
        // Log.d("CPCP2", recieveUser.getForName());
+
+            recieveUser = i.getParcelableExtra("inlog");
+            arrayPlace = recieveUser.getArrayNumber();
+            userS.get(arrayPlace).setForName(recieveUser.getForName());
+            userS.get(arrayPlace).setSurName(recieveUser.getSurName());
+            userS.get(arrayPlace).setOccupation(recieveUser.getOccupation());
+            userS.get(arrayPlace).setHobbies(recieveUser.getHobbies());
+            userS.get(arrayPlace).setUserName(recieveUser.getUserName());
+            userS.get(arrayPlace).setPassword(recieveUser.getPassword());
+            userS.get(arrayPlace).setAge(recieveUser.getAge());
+            Log.d("CPCP8888888", String.valueOf(userS.get(arrayPlace).getAge()));
+            omegaString.selectItem(recieveUser.getUserName());
+
+        if(extras.containsKey("saved")){
+            saveUsers();
+            Log.d("BARA","JÄVLA FITTA ANDROID");
+        }
+
+
     }
 
 
@@ -417,18 +425,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout(View view) {
-        /*arrayPlace = 0;
+        arrayPlace = 0;
         omegaString.selectItem((userS.get(arrayPlace).getUserName()));
-        textviewUsername.setText("doubleclick to edit");*/
-
-        SharedPreferences saVe = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = saVe.edit();
-
-        Gson gsonSave = new Gson();
-        String recieveUserGson = gsonSave.toJson(userS);
-
-        editor.putString("userS", recieveUserGson);
-        editor.apply();
+        textviewUsername.setText("doubleclick to edit");
 
     }
 
@@ -443,6 +442,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
         userS = savedInstanceState.getParcelableArrayList("userS");
+    }
+
+    public void saveUsers(){
+        SharedPreferences saVe = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = saVe.edit();
+
+        Gson gsonSave = new Gson();
+        String recieveUserGson = gsonSave.toJson(userS);
+
+        editor.putString("userS", recieveUserGson);
+        editor.apply();
+
     }
 
 

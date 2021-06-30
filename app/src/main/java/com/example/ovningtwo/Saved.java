@@ -154,7 +154,11 @@ public class Saved extends AppCompatActivity {
 
 
     public void onClickSave(View view) {
-
+        Toast.makeText(this, "Saved!",Toast.LENGTH_LONG).show();
+        Intent iblandUndrarMan  = new Intent(this, MainActivity.class);
+        iblandUndrarMan.putExtra("inlog", recieveUser);
+        iblandUndrarMan.putExtra("saved", "saved");
+        startActivity(iblandUndrarMan);
 
 
     }
