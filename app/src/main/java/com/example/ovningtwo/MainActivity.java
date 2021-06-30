@@ -1,23 +1,13 @@
 package com.example.ovningtwo;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+
 import androidx.lifecycle.ViewModelProvider;
 
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.ClipData;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,7 +32,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private Animation anim2;
 
     private ArrayList<UserInfo> userS;
-//    private final ArrayList<UserInfo>
+
     private int arrayPlace = 0;
     private UserInfo dummyX = new UserInfo("dummy","dummy",0);
 
@@ -128,19 +118,15 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         recieveUser = getIntent().getParcelableExtra("inlog"); // kommer denna krasha efter crash????
-        Log.d("CPCP", dummyX.getUserName());
+
         omegaString.selectItem(userS.get(arrayPlace).getUserName());
 
         try {
             arrayPlace = recieveUser.getArrayNumber();
-            Log.d("CPCP", String.valueOf(arrayPlace));
-            Log.d("CPCP", "asdgsdfgsdfg");
             userS.get(arrayPlace).setForName(recieveUser.getForName());
             userS.get(arrayPlace).setUserName(recieveUser.getUserName());
             userS.get(arrayPlace).setPassword(recieveUser.getPassword());
             omegaString.selectItem(recieveUser.getUserName());
-            Log.d("CPCP",userS.get(arrayPlace).getForName());
-            Log.d("CPCP", recieveUser.getForName());
         }
         catch(Exception e) {}
 
@@ -153,16 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
        Bundle extras = i.getExtras();
 
-
-
-      /*  Log.d("CPCP80000", String.valueOf(recieveUser.getArrayNumber()));
-        Log.d("CPCP80000", "asdgsdfgsdfg");
-        Log.d("CPCP80000", recieveUser.getSurName());
-        Log.d("CPCP80000", String.valueOf(recieveUser.getAge()));*/
-
-        //Log.d("CPCP2",userS.get(arrayPlace).getForName());
-       // Log.d("CPCP2", recieveUser.getForName());
-
             recieveUser = i.getParcelableExtra("inlog");
             arrayPlace = recieveUser.getArrayNumber();
             userS.get(arrayPlace).setForName(recieveUser.getForName());
@@ -172,14 +148,12 @@ public class MainActivity extends AppCompatActivity {
             userS.get(arrayPlace).setUserName(recieveUser.getUserName());
             userS.get(arrayPlace).setPassword(recieveUser.getPassword());
             userS.get(arrayPlace).setAge(recieveUser.getAge());
-            Log.d("CPCP8888888", String.valueOf(userS.get(arrayPlace).getAge()));
+
             omegaString.selectItem(recieveUser.getUserName());
 
         if(extras.containsKey("saved")){
             saveUsers();
-            Log.d("BARA","JÄVLA FITTA ANDROID");
         }
-
 
     }
 
@@ -200,23 +174,18 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.menuMain:
-                Log.d("menuMain", "menu main selected");
                 anim.cancel();
                 anim2.cancel();
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                 return true;
             case R.id.menuFormular:
-             //   Log.d("CPCP", String.valueOf(userS.get(arrayPlace).getArrayNumber()));
-
 
                 startActivity(new Intent(this, Formular.class).putExtra("inlog",userS.get(arrayPlace)));
-
                 anim.cancel();
                 anim2.cancel();
                 ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                 return true;
             case R.id.menuShowInfo:
-                Log.d("showInfo","show menu selected");
                 startActivity(new Intent (this, Saved.class).putExtra("inlog",userS.get(arrayPlace)));
                 anim.cancel();
                 anim2.cancel();
@@ -230,23 +199,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickUsername(View view) {
-
         omega = view;
         anim2.cancel();
-
         omega.startAnimation(anim);
-
         String fromUsername = textviewUsername.getText().toString();
 
         if(fromUsername.equals("doubleclick to edit")) {
             textviewUsername.setText("");
             fromUsername = "";
         }
-
         whatEver = 1;
-
-
-
         im.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
         dummy.requestFocus();
 
@@ -256,18 +218,13 @@ public class MainActivity extends AppCompatActivity {
         omega = view;
         anim.cancel();
         omega.startAnimation(anim2);
-
         String fromPassword = textviewPassword.getText().toString();
 
         if(fromPassword.equals("doubleclick to edit")) {
             textviewPassword.setText("");
             fromPassword = "";
         }
-
-
         whatEver = 2;
-
-
         im.showSoftInput(omega, InputMethodManager.SHOW_FORCED);
         dummy.requestFocus();
 
@@ -286,14 +243,14 @@ public class MainActivity extends AppCompatActivity {
         boolean finns = false;
         ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
 
-        //NEDAN FUNGERAR
+        //NEDAN FUNGERAR -- Låt stå
        // loggedIn setUserLoggedIn = (loggedIn) getSupportFragmentManager().getFragments().get(0);
         //setUserLoggedIn.setTextFragment("Logged in as: " + textviewUsername.getText());
 
-        //DETTA FUNGERAR MED
+        //DETTA FUNGERAR MED --
 
 
-        //
+        // -- låt stå --
         //fragment.setTextFragment("Logged in as: " +textviewUsername.getText());
 
 
@@ -303,13 +260,9 @@ public class MainActivity extends AppCompatActivity {
                 arrayPlace = 0;
                 arrayPlace = i;
                 omegaString.selectItem((String) textviewUsername.getText());
-                Log.d("GREKOLLE",userS.get(i).getUserName() + " " + userS.get(i).getPassword());
                 finns = true;
-            } else {
-                Log.d("GREKOLLE",userS.get(i).getUserName() + " " + userS.get(i).getPassword());
             }
         }
-
         if(!finns){
             Toast.makeText(this, "WRONG PASSWORD!",Toast.LENGTH_LONG).show();
         }
@@ -319,7 +272,6 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCreate(View view) {
 
         boolean userExist=false;
-
          arrayPlace = 0;
 
         for(int i = 0; i < userS.size(); i++) {
@@ -369,7 +321,6 @@ public class MainActivity extends AppCompatActivity {
                     dummy.requestFocus();
                     return true;
                 case 66:
-                    Log.d("CPÅKE", "test test");
                     ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                     anim.cancel();
                     anim2.cancel();
@@ -400,7 +351,6 @@ public class MainActivity extends AppCompatActivity {
                     dummy.requestFocus();
                     return true;
                 case 66:
-                    Log.d("CPÅKE", "test test");
                     ((InputMethodManager) MainActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                     anim.cancel();
                     anim2.cancel();

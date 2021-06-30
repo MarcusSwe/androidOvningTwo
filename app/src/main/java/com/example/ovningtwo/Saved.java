@@ -4,33 +4,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
+
+
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 
 
 public class Saved extends AppCompatActivity {
 
     private UserInfo recieveUser;
     private ItemViewModelString omegaString;
-
-    private Button save;
-    private View omega;
 
     private TextView forName;
     private TextView surName;
@@ -49,7 +42,6 @@ public class Saved extends AppCompatActivity {
         occupation = findViewById(R.id.textView123);
         hobbies = findViewById(R.id.textView124);
 
-
         recieveUser = getIntent().getParcelableExtra("inlog");
 
         omegaString = new ViewModelProvider(this).get(ItemViewModelString.class);
@@ -62,7 +54,7 @@ public class Saved extends AppCompatActivity {
         occupation.setText(recieveUser.getOccupation());
         hobbies.setText(recieveUser.getHobbies());
 
-        save = findViewById(R.id.buttonSave);
+
 
 
 
@@ -80,44 +72,32 @@ public class Saved extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         recieveUser = getIntent().getParcelableExtra("inlog");
-        Log.d("CPCP444444444444", recieveUser.getSurName());
         omegaString.selectItem(recieveUser.getUserName());
-        Log.d("CPCP11111111111", String.valueOf(recieveUser.getArrayNumber()));
-        Log.d("CPCP11111111111", String.valueOf(recieveUser.getAge()));
         forName.setText(recieveUser.getForName());
         surName.setText(recieveUser.getSurName());
         age.setText(String.valueOf(recieveUser.getAge()));
         occupation.setText(recieveUser.getOccupation());
         hobbies.setText(recieveUser.getHobbies());
-        //age.setText(recieveUser.getAge());
-        //recieveUser = getIntent().getParcelableExtra("inlog");
-        //forName.setText(recieveUser.getForName());
+
     }
 
 
 
     public boolean onOptionsItemSelected (MenuItem item){
 
-
         switch (item.getItemId()){
             case R.id.menuMain:
                 Log.d("menuMain", "menu main selected");
-
                 startActivity(new Intent(Saved.this, MainActivity.class).putExtra("inlog",recieveUser));
 
                 return true;
             case R.id.menuFormular:
                 Log.d("formular", "menu form selected");
-
                 startActivity(new Intent(Saved.this, Formular.class).putExtra("inlog",recieveUser));
 
                 return true;
             case R.id.menuShowInfo:
                 Log.d("showInfo","show menu selected");
-
-
-
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -126,18 +106,14 @@ public class Saved extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         recieveUser.setForName((String) forName.getText());
         recieveUser.setSurName((String) surName.getText());
 
-
-            recieveUser.setAge(Integer.parseInt((String) age.getText()));
-
+        recieveUser.setAge(Integer.parseInt((String) age.getText()));
 
         recieveUser.setOccupation((String) occupation.getText());
         recieveUser.setHobbies((String) hobbies.getText());
         startActivity(new Intent(this, MainActivity.class).putExtra("inlog",recieveUser));
-
     }
 
     @Override
@@ -159,10 +135,7 @@ public class Saved extends AppCompatActivity {
         iblandUndrarMan.putExtra("inlog", recieveUser);
         iblandUndrarMan.putExtra("saved", "saved");
         startActivity(iblandUndrarMan);
-
-
     }
-
 
 
 }

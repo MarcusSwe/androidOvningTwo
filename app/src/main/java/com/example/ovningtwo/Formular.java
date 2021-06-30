@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.util.regex.Pattern;
 
@@ -114,18 +114,12 @@ public class Formular extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         recieveUser = getIntent().getParcelableExtra("inlog");
-        Log.d("CPCP444444444444", recieveUser.getSurName());
         omegaString.selectItem(recieveUser.getUserName());
-        Log.d("CPCP11111111111", String.valueOf(recieveUser.getArrayNumber()));
-        Log.d("CPCP11111111111", String.valueOf(recieveUser.getAge()));
         forName.setText(recieveUser.getForName());
         surName.setText(recieveUser.getSurName());
         age.setText(String.valueOf(recieveUser.getAge()));
         occupation.setText(recieveUser.getOccupation());
         hobbies.setText(recieveUser.getHobbies());
-        //age.setText(recieveUser.getAge());
-        //recieveUser = getIntent().getParcelableExtra("inlog");
-        //forName.setText(recieveUser.getForName());
     }
 
     @Override
@@ -165,7 +159,6 @@ public class Formular extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.menuMain:
-                Log.d("menuMain", "menu main selected");
                 recieveUser.setForName((String) forName.getText());
                 recieveUser.setSurName((String) surName.getText());
                 if(kollaNummber((String) age.getText())){
@@ -173,7 +166,6 @@ public class Formular extends AppCompatActivity {
                 }
                 recieveUser.setOccupation((String) occupation.getText());
                 recieveUser.setHobbies((String) hobbies.getText());
-                Log.d("CPCP200", String.valueOf(recieveUser.getArrayNumber()));
                 startActivity(new Intent(Formular.this, MainActivity.class).putExtra("inlog",recieveUser));
 
                 return true;
@@ -323,7 +315,6 @@ public class Formular extends AppCompatActivity {
                         dummy.requestFocus();
                         return true;
                     case 66:
-                        Log.d("CPÅKE", "test test");
                         ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                         anim.cancel();
                         anim2.cancel();
@@ -354,7 +345,6 @@ public class Formular extends AppCompatActivity {
                         dummy.requestFocus();
                         return true;
                     case 66:
-                        Log.d("CPÅKE", "test test");
                         ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                         anim.cancel();
                         anim2.cancel();
@@ -385,7 +375,6 @@ public class Formular extends AppCompatActivity {
                         dummy.requestFocus();
                         return true;
                     case 66:
-                        Log.d("CPÅKE", "test test");
                         ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                         anim.cancel();
                         anim2.cancel();
@@ -416,7 +405,6 @@ public class Formular extends AppCompatActivity {
                         dummy.requestFocus();
                         return true;
                     case 66:
-                        Log.d("CPÅKE", "test test");
                         ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                         anim.cancel();
                         anim2.cancel();
@@ -447,7 +435,6 @@ public class Formular extends AppCompatActivity {
                         dummy.requestFocus();
                         return true;
                     case 66:
-                        Log.d("CPÅKE", "test test");
                         ((InputMethodManager) Formular.this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(omega.getWindowToken(), 0);
                         anim.cancel();
                         anim2.cancel();
